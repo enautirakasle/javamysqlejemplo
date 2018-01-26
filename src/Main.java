@@ -20,15 +20,15 @@ public class Main {
 			Statement st = con.createStatement();
 			
 			//ejecutar query
-			ResultSet rs = st.executeQuery("select * from usuarios");
+//			ResultSet rs = st.executeQuery("select * from usuarios");
 			
 			//imprimir en pantalla el resultado de la consulta
-			while (rs.next()) {
-				System.out.println(rs.getInt("id") + " "
-						+ rs.getString("nombre")
-						+ " " + rs.getString("apellido") + " "
-						+ rs.getInt("edad"));
-			}
+//			while (rs.next()) {
+//				System.out.println(rs.getInt("id") + " "
+//						+ rs.getString("nombre")
+//						+ " " + rs.getString("apellido") + " "
+//						+ rs.getInt("edad"));
+//			}
 
 			//ejecutar un insert
 			//st.execute("INSERT INTO usuarios(nombre, apellido, edad) VALUES ('mauricio', 'diaz', 19)");
@@ -42,6 +42,15 @@ public class Main {
 			System.out.println("Introduce una edad");
 			int edad = Integer.parseInt(scan.nextLine());
 			
+//			String sql = "INSERT INTO usuarios (nombre, apellido, edad) values('" +nombre+ "','" +apellido+"',"+edad+")";
+//			st.execute(sql);
+			
+			PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios (nombre, apellido, edad) values(?,?,?)");
+			pst.setString(1, nombre);
+			pst.setString(2, apellido);
+			pst.setInt(3, edad);
+			
+			pst.execute();
 	
 
 		} catch (ClassNotFoundException e) {
@@ -52,4 +61,19 @@ public class Main {
 
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
