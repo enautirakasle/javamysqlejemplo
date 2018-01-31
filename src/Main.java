@@ -51,6 +51,8 @@ public class Main {
 			pst.setInt(3, edad);
 			
 			pst.execute();
+			
+			st.execute("DELETE FROM usuarios WHERE id=2");
 	
 
 		} catch (ClassNotFoundException e) {
