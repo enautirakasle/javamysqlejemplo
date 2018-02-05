@@ -58,6 +58,9 @@ public class UsuarioVista {
 		System.out.println("Introduce la fecha de naciemento (dd/MM/yyyy)");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
+		System.out.println("Introduce DNI");
+		usuario.setDni(scan.nextLine());
+		
 		try {
 			fechaNacimiento = sdf.parse(scan.nextLine());
 			usuario.setFechaNacimiento(fechaNacimiento);
@@ -82,6 +85,8 @@ public class UsuarioVista {
 		System.out.println(usuario.getId()+ "\t - "+
 				usuario.getApellido()+ "\t - "+
 				usuario.getApellido()+ "\t - "+
+				usuario.getDni()+ "\t - "+
+				new SimpleDateFormat("dd/MM/yyyy").format(usuario.getFechaNacimiento())+ "\t - "+
 				usuario.getEdad());
 	}
 	
