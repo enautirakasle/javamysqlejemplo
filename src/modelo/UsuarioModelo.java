@@ -21,6 +21,7 @@ public class UsuarioModelo extends Conector{
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setApellido(rs.getString("apellido"));
 				usuario.setEdad(rs.getInt("edad"));
+				usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
 				
 				usuarios.add(usuario);
 			}
@@ -88,10 +89,14 @@ public class UsuarioModelo extends Conector{
 	
 	public void insert(Usuario usuario) {
 		try {
-			PreparedStatement pst = super.conexion.prepareStatement("INSERT INTO usuarios (nombre, apellido, edad) values(?,?,?)");
+			PreparedStatement pst = super.conexion.prepareStatement("INSERT INTO usuarios (nombre, apellido, edad, fecha_nacimiento) values(?,?,?,?)");
 			pst.setString(1, usuario.getNombre());
 			pst.setString(2, usuario.getApellido());
 			pst.setInt(3, usuario.getEdad());
+			
+			java.sql.Date sqlData = new java.sql.Date(usuario.getFechaNacimiento().getTime());
+			pst.setDate(4, sqlData);
+			
 			pst.execute();
 			
 		} catch (SQLException e) {
