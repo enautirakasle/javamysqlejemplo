@@ -1,13 +1,23 @@
 package modelo;
 
+import java.util.Date;
+
 public class Usuario {
 	//atributos
 	private int id;
 	private String nombre;
 	private String apellido;
 	private int edad;
+	private Date fechaNacimiento;
 	
 	
+	
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 	//getters and setters
 	public int getId() {
 		return id;
