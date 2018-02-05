@@ -62,7 +62,8 @@ public class UsuarioVista {
 			fechaNacimiento = sdf.parse(scan.nextLine());
 			usuario.setFechaNacimiento(fechaNacimiento);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			System.out.println("Ha indroducido mal la fecha");
+			return scanUsuario(scan);
 		}
 		
 		return usuario;
