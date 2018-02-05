@@ -60,6 +60,7 @@ public class UsuarioVista {
 		
 		try {
 			fechaNacimiento = sdf.parse(scan.nextLine());
+			usuario.setFechaNacimiento(fechaNacimiento);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
