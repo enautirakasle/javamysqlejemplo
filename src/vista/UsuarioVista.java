@@ -1,6 +1,9 @@
 package vista;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -30,7 +33,9 @@ public class UsuarioVista {
 				this.mostrarUsuarios(usuarios);
 				break;
 			case INSERTAR:
-
+				Usuario usuario = scanUsuario(scan);
+				usuarioModelo = new UsuarioModelo();
+				usuarioModelo.insert(usuario);
 				break;
 			default:
 				break;
@@ -38,6 +43,30 @@ public class UsuarioVista {
 		} while (opcion != SALIR);
 	}
 	
+	private Usuario scanUsuario(Scanner scan) {
+		Date fechaNacimiento;
+		Usuario usuario = new Usuario();
+		System.out.println("Introduce nombre");
+		usuario.setNombre(scan.nextLine());
+		
+		System.out.println("Introduce apellido");
+		usuario.setApellido(scan.nextLine());
+		
+		System.out.println("Introduce edad");
+		usuario.setEdad(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduce la fecha de naciemento (dd/MM/yyyy)");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			fechaNacimiento = sdf.parse(scan.nextLine());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return usuario;
+	}
+
 	public void mostrarUsuarios(ArrayList<Usuario> usuarios){
 		Iterator<Usuario> i = usuarios.iterator();
 		while(i.hasNext()){
