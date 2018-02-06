@@ -4,32 +4,49 @@ import java.util.Date;
 
 public class Prestamo {
 	private int id;
-	private int id_libro;
-	private int id_usuario;
-	private Date fecha;
+	private int idLibro;
+	private int idUsuario;
+	private Date fechaPrestamo;
+	private Date fechaLimite;
+	private boolean entregado;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId_libro() {
-		return id_libro;
+	public int getIdLibro() {
+		return idLibro;
 	}
-	public void setId_libro(int id_libro) {
-		this.id_libro = id_libro;
+	public void setIdLibro(int idLibro) {
+		this.idLibro = idLibro;
 	}
-	public int getId_usuario() {
-		return id_usuario;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	public Date getFecha() {
-		return fecha;
+	public Date getFechaPrestamo() {
+		return fechaPrestamo;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFechaPrestamo(Date fechaPrestamo) {
+		this.fechaPrestamo = fechaPrestamo;
 	}
+	public Date getFechaLimite() {
+		return fechaLimite;
+	}
+	public void setFechaLimite(Date fechaLimite) {
+		this.fechaLimite = fechaLimite;
+	}
+	public boolean isEntregado() {
+		return entregado;
+	}
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
+	}
+	
+	
 	
 }
