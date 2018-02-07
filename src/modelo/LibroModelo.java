@@ -51,12 +51,13 @@ public class LibroModelo extends Conector {
 		return null;
 	}
 	
-	public Libro select(String titulo) {
+	public Libro selectPorTitulo(String titulo) {
 		try {
 			PreparedStatement pst = super.conexion.prepareStatement("select * from libros where titulo = ?");
 			pst.setString(1, titulo);
 			ResultSet rs = pst.executeQuery();
 
+			//si hemos recibido alguna fila
 			if (rs.next()) {
 				Libro libro = new Libro();
 				libro.setId(rs.getInt("id"));
