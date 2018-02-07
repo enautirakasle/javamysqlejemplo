@@ -58,8 +58,7 @@ public class UsuarioVista {
 		System.out.println("Introduce la fecha de naciemento (dd/MM/yyyy)");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		System.out.println("Introduce DNI");
-		usuario.setDni(scan.nextLine());
+		
 		
 		try {
 			fechaNacimiento = sdf.parse(scan.nextLine());
@@ -68,6 +67,8 @@ public class UsuarioVista {
 			System.out.println("Ha indroducido mal la fecha");
 			return scanUsuario(scan);
 		}
+		System.out.println("Introduce DNI");
+		usuario.setDni(scan.nextLine());
 		
 		return usuario;
 	}
