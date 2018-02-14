@@ -22,7 +22,8 @@ public class UsuarioModelo extends Conector {
 				usuario.setApellido(rs.getString("apellido"));
 				usuario.setEdad(rs.getInt("edad"));
 				usuario.setDni(rs.getString("dni"));
-				usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+				java.util.Date fecha_nacimiento = rs.getDate("fecha_nacimiento");
+				usuario.setFechaNacimiento(fecha_nacimiento);
 
 				usuarios.add(usuario);
 			}

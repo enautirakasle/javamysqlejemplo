@@ -83,11 +83,19 @@ public class UsuarioVista {
 	}
 	
 	public void mostrarUsuario(Usuario usuario){
+		java.util.Date fecha_nacimiento = usuario.getFechaNacimiento();
+		String fecha = "";
+		if(fecha_nacimiento == null){
+			fecha = "fecha vacia";
+		}else{
+			fecha = new SimpleDateFormat("dd/MM/yyyy").format(usuario.getFechaNacimiento());
+		}
+		
 		System.out.println(usuario.getId()+ "\t - "+
 				usuario.getApellido()+ "\t - "+
 				usuario.getApellido()+ "\t - "+
 				usuario.getDni()+ "\t - "+
-				new SimpleDateFormat("dd/MM/yyyy").format(usuario.getFechaNacimiento())+ "\t - "+
+				fecha + "\t - "+
 				usuario.getEdad());
 	}
 	
