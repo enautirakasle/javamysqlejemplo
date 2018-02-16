@@ -34,6 +34,35 @@ public class UsuarioModelo extends Conector {
 		}
 		return usuarios;
 	}
+	
+	
+	public ArrayList<Usuario> selectAllOrderBy(String campo) {
+		// crear arrayList
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+		try {
+			Statement st = super.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from usuarios order by " + campo);
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setApellido(rs.getString("apellido"));
+				usuario.setEdad(rs.getInt("edad"));
+				usuario.setDni(rs.getString("dni"));
+				java.util.Date fecha_nacimiento = rs.getDate("fecha_nacimiento");
+				usuario.setFechaNacimiento(fecha_nacimiento);
+
+				
+				usuarios.add(usuario);
+			}
+			return usuarios;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usuarios;
+	}
 
 	public Usuario select(int id) {
 		// select * from usuarios where id = 7
