@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Usuario {
@@ -9,16 +10,23 @@ public class Usuario {
 	private String apellido;
 	private int edad;
 	private String dni;
+	private Date fechaNacimiento;
+	
+	private ArrayList<Prestamo> prestamos;
+	
+	//metodos
+	public ArrayList<Prestamo> getPrestamos() {
+		return prestamos;
+	}
+	public void setPrestamos(ArrayList<Prestamo> prestamos) {
+		this.prestamos = prestamos;
+	}
 	public String getDni() {
 		return dni;
 	}
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	private Date fechaNacimiento;
-	
-	
-	
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}

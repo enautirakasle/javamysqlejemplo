@@ -14,8 +14,8 @@ public class PrestamoModelo extends Conector{
 	public void insertar(Prestamo prestamo){
 		try {
 			PreparedStatement pst = super.conexion.prepareStatement("insert into prestamos (id_libro, id_usuario, fecha_prestamo, fecha_limite, entregado) values(?,?,?,?,?)");
-			pst.setInt(1, prestamo.getIdLibro());
-			pst.setInt(2, prestamo.getIdUsuario());
+			pst.setInt(1, prestamo.getLibro().getId());
+			pst.setInt(2, prestamo.getUsuario().getId());
 			pst.setDate(3, new java.sql.Date(prestamo.getFechaPrestamo().getTime()));
 			pst.setDate(4, new java.sql.Date(prestamo.getFechaLimite().getTime()));
 			pst.setBoolean(5, prestamo.isEntregado());
@@ -30,6 +30,9 @@ public class PrestamoModelo extends Conector{
 	public ArrayList<Prestamo> selectAll(){
 		Statement st;
 		Prestamo prestamo;
+		UsuarioModelo usuarioModelo = new UsuarioModelo();
+		LibroModelo libroModelo= new LibroModelo();
+		
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
 			st = super.conexion.createStatement();
@@ -37,8 +40,8 @@ public class PrestamoModelo extends Conector{
 			while(rs.next()){
 				prestamo = new Prestamo();
 				prestamo.setId(rs.getInt("id"));
-				prestamo.setIdLibro(rs.getInt("id_libro"));
-				prestamo.setIdUsuario(rs.getInt("id_usuario"));
+				prestamo.setLibro(libroModelo.select(rs.getInt("id_libro"))); 
+				prestamo.setUsuario(usuarioModelo.select(rs.getInt("id_usuario")));
 				prestamo.setFechaPrestamo(rs.getDate("fecha_prestamo"));
 				prestamo.setFechaLimite(rs.getDate("fecha_limite"));
 				prestamo.setEntregado(rs.getBoolean("entregado"));
@@ -60,6 +63,9 @@ public class PrestamoModelo extends Conector{
 	public Prestamo prestamoNoFinalizado(Libro libro, Usuario usuario) {
 		PreparedStatement pst;
 		
+		UsuarioModelo usuarioModelo = new UsuarioModelo();
+		LibroModelo libroModelo= new LibroModelo();
+		
 		try {
 			pst = super.conexion.prepareStatement("SELECT * FROM prestamos WHERE id_libro = ? and id_usuario=? and entregado = ?");
 			pst.setInt(1, libro.getId());
@@ -70,8 +76,8 @@ public class PrestamoModelo extends Conector{
 			if(rs.next()){
 				Prestamo prestamo = new Prestamo();
 				prestamo.setId(rs.getInt("id"));
-				prestamo.setIdUsuario(rs.getInt("id_usuario"));
-				prestamo.setIdLibro(rs.getInt("id_libro"));
+				prestamo.setLibro(libroModelo.select(rs.getInt("id_libro"))); 
+				prestamo.setUsuario(usuarioModelo.select(rs.getInt("id_usuario")));
 				prestamo.setFechaPrestamo(rs.getDate("fecha_prestamo"));
 				prestamo.setFechaLimite(rs.getDate("fecha_limite"));
 				prestamo.setEntregado(rs.getBoolean("entregado"));
@@ -91,8 +97,8 @@ public class PrestamoModelo extends Conector{
 		PreparedStatement pst;
 		try {
 			pst = super.conexion.prepareStatement("UPDATE prestamos SET id_libro=?,id_usuario=?,fecha_prestamo=?,fecha_limite=?,entregado=? WHERE id=?");
-			pst.setInt(1, prestamo.getIdLibro());
-			pst.setInt(2, prestamo.getIdUsuario());
+			pst.setInt(1, prestamo.getLibro().getId());
+			pst.setInt(2, prestamo.getUsuario().getId());
 			java.sql.Date fecha_prestamo= new java.sql.Date(prestamo.getFechaPrestamo().getTime());
 			pst.setDate(3, fecha_prestamo);
 			java.sql.Date fecha_limite = new java.sql.Date(prestamo.getFechaLimite().getTime());
@@ -102,7 +108,6 @@ public class PrestamoModelo extends Conector{
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
